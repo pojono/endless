@@ -5,10 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
-    TasksModule,
-    AuthModule,
-  ],
+  imports: [TypeOrmModule.forRoot(typeOrmConfig), TasksModule, AuthModule],
 })
 export class AppModule {}

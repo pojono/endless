@@ -3,7 +3,8 @@ import {
   Controller,
   Delete,
   Get,
-  Param, ParseIntPipe,
+  Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -22,7 +23,9 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
 
   @Get()
-  getTasks(@Query(ValidationPipe) filterDto: GetFilterTaskDto): Promise<Task[]> {
+  getTasks(
+    @Query(ValidationPipe) filterDto: GetFilterTaskDto,
+  ): Promise<Task[]> {
     return this.tasksService.getTasks(filterDto);
   }
 
