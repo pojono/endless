@@ -21,3 +21,6 @@ npm run format
 
 Validation decorators:
 https://github.com/typestack/class-validator#validation-decorators
+
+Local postgres:
+docker run --name task-postgres -p 5454:5432 -e POSTGRES_PASSWORD=postgres -d postgres
