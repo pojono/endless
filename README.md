@@ -18,3 +18,6 @@ npm run lint
 
 Format:
 npm run format
+
+Validation decorators:
+https://github.com/typestack/class-validator#validation-decorators
