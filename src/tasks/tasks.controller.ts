@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -25,6 +26,7 @@ import { User } from '../auth/user.entity';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
+  private logger = new Logger('TaskController');
   constructor(private tasksService: TasksService) {}
 
   @Get()
@@ -32,13 +34,18 @@ export class TasksController {
     @GetUser() user: User,
     @Query(ValidationPipe) filterDto: GetFilterTaskDto,
   ): Promise<Task[]> {
+    this.logger.verbose(
+      `User ${user.username} retrieving all tasks. Filters: ${JSON.stringify(
+        filterDto,
+      )}`,
+    );
     return this.tasksService.getTasks(user, filterDto);
   }
 
   @Get('/:id')
   getTaskById(
     @GetUser() user: User,
-    @Param('id', ParseIntPipe) id: number
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<Task> {
     return this.tasksService.getTaskById(user, id);
   }
@@ -46,7 +53,8 @@ export class TasksController {
   @Delete('/:id')
   deleteTaskById(
     @GetUser() user: User,
-    @Param('id', ParseIntPipe) id: number): Promise<void> {
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<void> {
     return this.tasksService.deleteTaskById(user, id);
   }
 
@@ -56,6 +64,11 @@ export class TasksController {
     @GetUser() user: User,
     @Body() createTaskDto: CreateTaskDto,
   ): Promise<Task> {
+    this.logger.verbose(
+      `User ${user.username} creating a new task: ${JSON.stringify(
+        createTaskDto,
+      )}`,
+    );
     return this.tasksService.createTask(user, createTaskDto);
   }
 
