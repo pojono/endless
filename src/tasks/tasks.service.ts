@@ -40,9 +40,7 @@ export class TasksService {
     return task;
   }
 
-  async createTask(
-    user: User,
-    createTaskDto: CreateTaskDto): Promise<Task> {
+  async createTask(user: User, createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskRepository.createTask(user, createTaskDto);
   }
 }

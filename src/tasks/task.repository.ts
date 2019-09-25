@@ -27,9 +27,7 @@ export class TaskRepository extends Repository<Task> {
     return tasks;
   }
 
-  async createTask(
-    user: User,
-    createTaskDto: CreateTaskDto): Promise<Task> {
+  async createTask(user: User, createTaskDto: CreateTaskDto): Promise<Task> {
     const { title, description } = createTaskDto;
 
     const task = new Task();
